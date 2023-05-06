@@ -1,11 +1,16 @@
 package com.example.security_app.auth;
 
+import com.example.security_app.model.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterRequest {
 
     @Id
@@ -19,7 +24,14 @@ public class RegisterRequest {
 
     private String password;
 
-    public RegisterRequest() {
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public RegisterRequest(String firstname, String lastname, String email, String password) {

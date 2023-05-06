@@ -2,6 +2,7 @@ package com.example.security_app.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,13 +14,10 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/auth")
+@RequiredArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationService service;
-
-    public AuthenticationController(AuthenticationService service) {
-        this.service = service;
-    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(

@@ -1,7 +1,11 @@
  package com.example.security_app.model;
 
 
+import com.example.security_app.auth.AuthenticationResponse;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,61 +15,64 @@ import java.util.List;
 
  @Entity
  @Table(name ="_user")
+ @Builder
+ @NoArgsConstructor
+ @AllArgsConstructor
 public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+     @Id
+     @GeneratedValue(strategy = GenerationType.TABLE)
+     private Long id;
 
-    private String firstname;
+     private String firstname;
 
-    private String lastname;
+     private String lastname;
 
-    private String email;
+     private String email;
 
      private String password;
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    public User() {
-    }
+     @Enumerated(EnumType.STRING)
+     private Role role;
 
-    public User(String firstname, String lastname, String email, String password) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-    }
+     public Role getRole() {
+         return role;
+     }
 
-    public Long getId() {
-        return id;
-    }
+     public void setRole(Role role) {
+         this.role = role;
+     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getFirstname() {
-        return firstname;
-    }
+     public Long getId() {
+         return id;
+     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+     public void setId(Long id) {
+         this.id = id;
+     }
 
-    public String getLastname() {
-        return lastname;
-    }
+     public String getFirstname() {
+         return firstname;
+     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+     public void setFirstname(String firstname) {
+         this.firstname = firstname;
+     }
 
-    public String getEmail() {
-        return email;
-    }
+     public String getLastname() {
+         return lastname;
+     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+     public void setLastname(String lastname) {
+         this.lastname = lastname;
+     }
+
+     public String getEmail() {
+         return email;
+     }
+
+     public void setEmail(String email) {
+         this.email = email;
+     }
 
 
      @Override
@@ -102,4 +109,6 @@ public class User implements UserDetails {
      public String getPassword() {
          return password;
      }
+
  }
+
