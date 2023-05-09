@@ -1,10 +1,11 @@
  package com.example.security_app.model;
 
 
-import com.example.security_app.auth.AuthenticationResponse;
+import com.example.security_app.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Data
  @Entity
  @Table(name ="_user")
  @Builder
@@ -32,6 +34,9 @@ public class User implements UserDetails {
      private String password;
      @Enumerated(EnumType.STRING)
      private Role role;
+
+     @OneToMany(mappedBy = "user")
+     private List<Token>tokens;
 
      public Role getRole() {
          return role;
