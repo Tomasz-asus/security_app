@@ -1,30 +1,42 @@
 package com.example.security_app.token;
 
 import com.example.security_app.model.User;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Token {
+
     @Id
     @GeneratedValue
-    private Long id;
+    public Integer id;
 
-    private String token;
+    @Column(unique = true)
+    public String token;
+
     @Enumerated(EnumType.STRING)
-    private TokenType tokenType;
+    public TokenType tokenType = TokenType.BEARER;
 
-    private boolean expired;
+    public boolean revoked;
 
-    private boolean revoked;
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    public boolean expired;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    public User user;
 }
