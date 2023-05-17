@@ -2,33 +2,26 @@ package com.example.security_app.auth;
 
 
 import com.example.security_app.config.JwtService;
-import com.example.security_app.model.Role;
 import com.example.security_app.model.User;
 import com.example.security_app.repository.TokenRepository;
 import com.example.security_app.repository.UserRepository;
 import com.example.security_app.token.Token;
 import com.example.security_app.token.TokenType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.mail.MessagingException;
+
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 import java.io.IOException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -47,6 +40,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
+
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -56,6 +50,9 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .build();
     }
+
+
+
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(

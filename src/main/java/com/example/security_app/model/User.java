@@ -9,6 +9,8 @@
  import jakarta.persistence.Id;
  import jakarta.persistence.OneToMany;
  import jakarta.persistence.Table;
+
+ import java.util.ArrayList;
  import java.util.Collection;
  import java.util.List;
  import lombok.AllArgsConstructor;
@@ -40,6 +42,10 @@
 
      @OneToMany(mappedBy = "user")
      private List<Token> tokens;
+
+
+     @OneToMany
+     private List<OrderCart> orderCarts = new ArrayList<>();
 
      @Override
      public Collection<? extends GrantedAuthority> getAuthorities() {

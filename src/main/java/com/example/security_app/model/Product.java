@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "_motorcycle")
-public class Motorcycle {
+public class Product {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
