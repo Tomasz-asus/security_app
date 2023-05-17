@@ -1,10 +1,7 @@
 package com.example.security_app.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,8 +9,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "_motorcycle")
+@Table(name = "_product")
 public class Product {
 
     @Id
@@ -21,15 +20,14 @@ public class Product {
     private Integer id;
 
 
-    private String motorcycleName;
-    private String motorcycleDescription;
-    private Double motorcyclePrice;
+    private String productName;
+    private String productDescription;
+    private Double productPrice;
     private String imageURL;
 
     @Enumerated(EnumType.STRING)
-    private MotorcycleType motorcycleType;
+    private ProductCategory category;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Basket> basketList;
-
+    private List<Basket> baskets;
 }
