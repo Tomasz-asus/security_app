@@ -1,4 +1,4 @@
-package com.example.security_app.auth;
+package com.example.security_app.controller;
 
 
 import com.example.security_app.model.Role;

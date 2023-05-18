@@ -1,21 +1,18 @@
 package com.example.security_app.DTO;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "_ordercartDTO")
+@Table(name = "_orderCartDTO")
 public class OrderCartDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +26,7 @@ public class OrderCartDTO {
     private LocalDateTime orderDate;
     private String username;
     private String basketName;
+
+    public OrderCartDTO(String username, String firstAndLastName, String basketName, String street, String postalCode, String city, Integer phoneNumber) {
+    }
 }

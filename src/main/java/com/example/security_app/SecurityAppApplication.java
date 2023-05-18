@@ -1,7 +1,7 @@
 package com.example.security_app;
 
-import com.example.security_app.auth.AuthenticationService;
-import com.example.security_app.auth.RegisterRequestUser;
+import com.example.security_app.service.AuthenticationService;
+import com.example.security_app.controller.RegisterRequestUser;
 import com.example.security_app.repository.MotorcycleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

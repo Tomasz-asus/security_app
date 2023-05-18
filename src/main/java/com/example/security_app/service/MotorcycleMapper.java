@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ProductMapper {
+public class MotorcycleMapper {
 
     public static MotorcycleDTO fromEntity(Motorcycle motorcycle) {
         return new MotorcycleDTO(motorcycle.getMotorcycleName(),

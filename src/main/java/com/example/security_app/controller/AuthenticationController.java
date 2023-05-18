@@ -1,5 +1,6 @@
-package com.example.security_app.auth;
+package com.example.security_app.controller;
 
+import com.example.security_app.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

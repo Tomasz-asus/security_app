@@ -27,4 +27,7 @@ public class Basket {
     private String basketName;
 
 
+    public void removeMotorcycleFromBasket(Motorcycle byMotorcycleName) {
+        motorcycles.remove(motorcycles);
+    }
 }

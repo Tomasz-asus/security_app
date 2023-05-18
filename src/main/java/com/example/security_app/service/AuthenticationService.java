@@ -1,7 +1,10 @@
-package com.example.security_app.auth;
+package com.example.security_app.service;
 
 
 import com.example.security_app.config.JwtService;
+import com.example.security_app.controller.AuthenticationRequest;
+import com.example.security_app.controller.AuthenticationResponse;
+import com.example.security_app.controller.RegisterRequestUser;
 import com.example.security_app.model.User;
 import com.example.security_app.repository.TokenRepository;
 import com.example.security_app.repository.UserRepository;

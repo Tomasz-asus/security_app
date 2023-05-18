@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "_ordercart")
+@Table(name = "_orderCart")
 public class OrderCart {
 
     @Id
@@ -33,4 +33,7 @@ public class OrderCart {
     private LocalDateTime orderDate;
     private String username;
     private String basketName;
+
+    public OrderCart(List<Motorcycle> motorcycles, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime now, String firstAndLastName, String username, String basketName) {
+    }
 }
