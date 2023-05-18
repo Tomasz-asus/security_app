@@ -23,7 +23,7 @@ public class OrderCart {
     private Integer id;
 
     @ManyToMany
-    private List<Product> products = new ArrayList<>();
+    private List<Motorcycle> motorcycles = new ArrayList<>();
 
     private String firstAndLastName;
     private String street;

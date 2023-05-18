@@ -22,7 +22,7 @@ public class Basket {
     private Integer id;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
+    private List<Motorcycle> motorcycles = new ArrayList<>();
 
     private String basketName;
 

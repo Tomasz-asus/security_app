@@ -15,7 +15,7 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = ProductNotFoundException.class)
+    @ExceptionHandler(value = MotorcycleNotFoundException.class)
     public ResponseEntity<String> handleProductNotFound(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
@@ -25,7 +25,7 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = ProductAlreadyExistException.class)
+    @ExceptionHandler(value = MotorcycleAlreadyExistException.class)
     public ResponseEntity<String> handleProductAlreadyExist(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }

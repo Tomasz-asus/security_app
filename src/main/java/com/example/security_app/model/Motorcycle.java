@@ -13,21 +13,24 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "_product")
-public class Product {
+public class Motorcycle {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
-    private String productName;
-    private String productDescription;
-    private Double productPrice;
+    private String motorcycleName;
+    private String motorcycleDescription;
+    private Double motorcyclePrice;
     private String imageURL;
 
     @Enumerated(EnumType.STRING)
-    private ProductCategory category;
+    private MotorcycleCategory category;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Basket> baskets;
+
+    public Motorcycle(String motorcycleName, String motorcycleDescription, Double motorcyclePrice, String imageURL, MotorcycleCategory category) {
+    }
 }

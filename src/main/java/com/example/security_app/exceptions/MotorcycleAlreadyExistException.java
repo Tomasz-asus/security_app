@@ -5,9 +5,9 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ProductNotFoundException extends RuntimeException {
+public class MotorcycleAlreadyExistException extends RuntimeException{
 
-    public ProductNotFoundException(String message) {
+    public MotorcycleAlreadyExistException(String message) {
         super(message);
     }
 }
