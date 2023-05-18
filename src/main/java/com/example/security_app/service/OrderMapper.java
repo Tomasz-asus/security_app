@@ -1,13 +1,11 @@
 package com.example.security_app.service;
 
 import com.example.security_app.DTO.OrderCartDTO;
-import com.example.security_app.model.Motorcycle;
 import com.example.security_app.model.OrderCart;
 import com.example.security_app.repository.BasketRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderMapper {
 
@@ -18,34 +16,40 @@ public class OrderMapper {
     }
 
 
-    public static OrderCart OrderfromDTO(OrderCartDTO orderCartDTO) {
+    public static OrderCart OrderFromDTO(OrderCartDTO orderCartDTO) {
 
-        return new OrderCart(mappingProductsFromBasket(orderCartDTO.getBasketName()),
-                orderCartDTO.getStreet(),
-                orderCartDTO.getPostalCode(),
-                orderCartDTO.getCity(),
-                orderCartDTO.getPhoneNumber(),
-                LocalDateTime.now(),
-                orderCartDTO.getFirstAndLastName(),
-                orderCartDTO.getUsername(),
-                orderCartDTO.getBasketName()
-        );
-    }
+        return new OrderCart(
+                mappingMotorcyclesFromBasket(orderCartDTO.getBasketName()),
+                        orderCartDTO.getFirstName(),
+                        orderCartDTO.getLastName(),
+                        orderCartDTO.getStreet(),
+                        orderCartDTO.getPostalCode(),
+                        orderCartDTO.getCity(),
+                        orderCartDTO.getPhoneNumber(),
+                        LocalDateTime.now(),
+                        orderCartDTO.getUsername(),
+                        orderCartDTO.getBasketName()
+                        );
+}
 
-    public static OrderCartDTO OrderfromEntity(OrderCart orderCart) {
+    private static Object mappingMotorcyclesFromBasket(String basketName) {
+        return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getMotorcycles());}
 
-        return new OrderCartDTO(orderCart.getUsername(),
-                orderCart.getFirstAndLastName(),
-                orderCart.getBasketName(),
+    public static OrderCartDTO OrderFromEntity(OrderCart orderCart) {
+
+        return new OrderCartDTO(
+                orderCart.getId(),
+                orderCart.getFirstName(),
+                orderCart.getLastName(),
                 orderCart.getStreet(),
                 orderCart.getPostalCode(),
                 orderCart.getCity(),
-                orderCart.getPhoneNumber());
+                orderCart.getPhoneNumber(),
+                LocalDateTime.now(),
+                orderCart.getUsername(),
+                orderCart.getBasketName());
     }
 
-    private static List<Motorcycle> mappingProductsFromBasket(String basketName) {
-        return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getMotorcycles());
-    }
 
     public boolean equals(final Object o) {
         if (o == this) return true;

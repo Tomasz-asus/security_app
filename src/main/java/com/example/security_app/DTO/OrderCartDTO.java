@@ -11,7 +11,9 @@ public class OrderCartDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstAndLastName;
+    private String firstName;
+
+    private String lastName;
     private String street;
     private String postalCode;
     private String city;
@@ -20,12 +22,13 @@ public class OrderCartDTO {
     private String username;
     private String basketName;
 
-    public OrderCartDTO(String username, String firstAndLastName, String basketName, String street, String postalCode, String city, Integer phoneNumber) {
+    public OrderCartDTO(String username, String firstName, String lastName, String basketName, String street, String postalCode, String city, Integer phoneNumber) {
     }
 
-    public OrderCartDTO(Integer id, String firstAndLastName, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime orderDate, String username, String basketName) {
+    public OrderCartDTO(Integer id, String firstName, String lastName, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime orderDate, String username, String basketName) {
         this.id = id;
-        this.firstAndLastName = firstAndLastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
@@ -50,9 +53,13 @@ public class OrderCartDTO {
         final Object this$id = this.getId();
         final Object other$id = other.getId();
         if (this$id == null ? other$id != null : !this$id.equals(other$id)) return false;
-        final Object this$firstAndLastName = this.getFirstAndLastName();
-        final Object other$firstAndLastName = other.getFirstAndLastName();
-        if (this$firstAndLastName == null ? other$firstAndLastName != null : !this$firstAndLastName.equals(other$firstAndLastName))
+        final Object this$firstName = this.getFirstName();
+        final Object other$firstName = other.getFirstName();
+        if (this$firstName == null ? other$firstName != null : !this$firstName.equals(other$firstName))
+            return false;
+        final Object this$lastName = this.getLastName();
+        final Object other$lastName = other.getLastName();
+        if (this$lastName == null ? other$lastName != null : !this$lastName.equals(other$lastName))
             return false;
         final Object this$street = this.getStreet();
         final Object other$street = other.getStreet();
@@ -90,8 +97,10 @@ public class OrderCartDTO {
         int result = 1;
         final Object $id = this.getId();
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
-        final Object $firstAndLastName = this.getFirstAndLastName();
-        result = result * PRIME + ($firstAndLastName == null ? 43 : $firstAndLastName.hashCode());
+        final Object $firstName = this.getFirstName();
+        result = result * PRIME + ($firstName == null ? 43 : $firstName.hashCode());
+        final Object $lastName = this.getLastName();
+        result = result * PRIME + ($lastName == null ? 43 : $lastName.hashCode());
         final Object $street = this.getStreet();
         result = result * PRIME + ($street == null ? 43 : $street.hashCode());
         final Object $postalCode = this.getPostalCode();
@@ -109,16 +118,32 @@ public class OrderCartDTO {
         return result;
     }
 
+    @Override
     public String toString() {
-        return "OrderCartDTO(id=" + this.getId() + ", firstAndLastName=" + this.getFirstAndLastName() + ", street=" + this.getStreet() + ", postalCode=" + this.getPostalCode() + ", city=" + this.getCity() + ", phoneNumber=" + this.getPhoneNumber() + ", orderDate=" + this.getOrderDate() + ", username=" + this.getUsername() + ", basketName=" + this.getBasketName() + ")";
+        return "OrderCartDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", orderDate=" + orderDate +
+                ", username='" + username + '\'' +
+                ", basketName='" + basketName + '\'' +
+                '}';
     }
 
     public Integer getId() {
         return this.id;
     }
 
-    public String getFirstAndLastName() {
-        return this.firstAndLastName;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getStreet() {
@@ -153,8 +178,8 @@ public class OrderCartDTO {
         this.id = id;
     }
 
-    public void setFirstAndLastName(String firstAndLastName) {
-        this.firstAndLastName = firstAndLastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setStreet(String street) {
@@ -173,6 +198,10 @@ public class OrderCartDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
@@ -187,7 +216,9 @@ public class OrderCartDTO {
 
     public static class OrderCartDTOBuilder {
         private Integer id;
-        private String firstAndLastName;
+        private String firstName;
+
+        private String lastName;
         private String street;
         private String postalCode;
         private String city;
@@ -204,8 +235,14 @@ public class OrderCartDTO {
             return this;
         }
 
-        public OrderCartDTOBuilder firstAndLastName(String firstAndLastName) {
-            this.firstAndLastName = firstAndLastName;
+        public OrderCartDTOBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+
+        public OrderCartDTOBuilder lastName(String lastName) {
+            this.lastName = lastName;
             return this;
         }
 
@@ -245,11 +282,23 @@ public class OrderCartDTO {
         }
 
         public OrderCartDTO build() {
-            return new OrderCartDTO(this.id, this.firstAndLastName, this.street, this.postalCode, this.city, this.phoneNumber, this.orderDate, this.username, this.basketName);
+            return new OrderCartDTO(this.id, this.firstName, this.lastName, this.street, this.postalCode, this.city, this.phoneNumber, this.orderDate, this.username, this.basketName);
         }
 
+        @Override
         public String toString() {
-            return "OrderCartDTO.OrderCartDTOBuilder(id=" + this.id + ", firstAndLastName=" + this.firstAndLastName + ", street=" + this.street + ", postalCode=" + this.postalCode + ", city=" + this.city + ", phoneNumber=" + this.phoneNumber + ", orderDate=" + this.orderDate + ", username=" + this.username + ", basketName=" + this.basketName + ")";
+            return "OrderCartDTOBuilder{" +
+                    "id=" + id +
+                    ", firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    ", street='" + street + '\'' +
+                    ", postalCode='" + postalCode + '\'' +
+                    ", city='" + city + '\'' +
+                    ", phoneNumber=" + phoneNumber +
+                    ", orderDate=" + orderDate +
+                    ", username='" + username + '\'' +
+                    ", basketName='" + basketName + '\'' +
+                    '}';
         }
     }
 }

@@ -17,7 +17,10 @@ public class OrderCart {
     @ManyToMany
     private List<Motorcycle> motorcycles = new ArrayList<>();
 
-    private String firstAndLastName;
+    private String firstName;
+
+    private String lastName;
+
     private String street;
     private String postalCode;
     private String city;
@@ -26,13 +29,12 @@ public class OrderCart {
     private String username;
     private String basketName;
 
-    public OrderCart(List<Motorcycle> motorcycles, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime now, String firstAndLastName, String username, String basketName) {
-    }
 
-    public OrderCart(Integer id, List<Motorcycle> motorcycles, String firstAndLastName, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime orderDate, String username, String basketName) {
+    public OrderCart(Integer id, List<Motorcycle> motorcycles, String firstName, String lastName, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime orderDate, String username, String basketName) {
         this.id = id;
         this.motorcycles = motorcycles;
-        this.firstAndLastName = firstAndLastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
@@ -43,6 +45,9 @@ public class OrderCart {
     }
 
     public OrderCart() {
+    }
+
+    public OrderCart(Object o, String firstName, String lastName, String street, String postalCode, String city, Integer phoneNumber, LocalDateTime now, String username, String basketName) {
     }
 
     public static OrderCartBuilder builder() {
@@ -57,8 +62,16 @@ public class OrderCart {
         return this.motorcycles;
     }
 
-    public String getFirstAndLastName() {
-        return this.firstAndLastName;
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getStreet() {
@@ -97,8 +110,8 @@ public class OrderCart {
         this.motorcycles = motorcycles;
     }
 
-    public void setFirstAndLastName(String firstAndLastName) {
-        this.firstAndLastName = firstAndLastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setStreet(String street) {
@@ -141,9 +154,13 @@ public class OrderCart {
         final Object other$motorcycles = other.getMotorcycles();
         if (this$motorcycles == null ? other$motorcycles != null : !this$motorcycles.equals(other$motorcycles))
             return false;
-        final Object this$firstAndLastName = this.getFirstAndLastName();
-        final Object other$firstAndLastName = other.getFirstAndLastName();
-        if (this$firstAndLastName == null ? other$firstAndLastName != null : !this$firstAndLastName.equals(other$firstAndLastName))
+        final Object this$firstName = this.getFirstName();
+        final Object other$firstName = other.getFirstName();
+        if (this$firstName == null ? other$firstName != null : !this$firstName.equals(other$firstName))
+            return false;
+        final Object this$lastName = this.getLastName();
+        final Object other$lastName = other.getLastName();
+        if (this$lastName == null ? other$lastName != null : !this$lastName.equals(other$lastName))
             return false;
         final Object this$street = this.getStreet();
         final Object other$street = other.getStreet();
@@ -183,7 +200,7 @@ public class OrderCart {
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
         final Object $motorcycles = this.getMotorcycles();
         result = result * PRIME + ($motorcycles == null ? 43 : $motorcycles.hashCode());
-        final Object $firstAndLastName = this.getFirstAndLastName();
+        final Object $firstAndLastName = this.getFirstName();
         result = result * PRIME + ($firstAndLastName == null ? 43 : $firstAndLastName.hashCode());
         final Object $street = this.getStreet();
         result = result * PRIME + ($street == null ? 43 : $street.hashCode());
@@ -203,13 +220,15 @@ public class OrderCart {
     }
 
     public String toString() {
-        return "OrderCart(id=" + this.getId() + ", motorcycles=" + this.getMotorcycles() + ", firstAndLastName=" + this.getFirstAndLastName() + ", street=" + this.getStreet() + ", postalCode=" + this.getPostalCode() + ", city=" + this.getCity() + ", phoneNumber=" + this.getPhoneNumber() + ", orderDate=" + this.getOrderDate() + ", username=" + this.getUsername() + ", basketName=" + this.getBasketName() + ")";
+        return "OrderCart(id=" + this.getId() + ", motorcycles=" + this.getMotorcycles() + ", firstAndLastName=" + this.getFirstName() + ", street=" + this.getStreet() + ", postalCode=" + this.getPostalCode() + ", city=" + this.getCity() + ", phoneNumber=" + this.getPhoneNumber() + ", orderDate=" + this.getOrderDate() + ", username=" + this.getUsername() + ", basketName=" + this.getBasketName() + ")";
     }
 
     public static class OrderCartBuilder {
         private Integer id;
         private List<Motorcycle> motorcycles;
-        private String firstAndLastName;
+        private String firstName;
+
+        private String lastName;
         private String street;
         private String postalCode;
         private String city;
@@ -231,11 +250,15 @@ public class OrderCart {
             return this;
         }
 
-        public OrderCartBuilder firstAndLastName(String firstAndLastName) {
-            this.firstAndLastName = firstAndLastName;
+        public OrderCartBuilder firstName(String firstName) {
+            this.firstName = firstName;
             return this;
         }
 
+        public OrderCartBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
         public OrderCartBuilder street(String street) {
             this.street = street;
             return this;
@@ -272,11 +295,35 @@ public class OrderCart {
         }
 
         public OrderCart build() {
-            return new OrderCart(this.id, this.motorcycles, this.firstAndLastName, this.street, this.postalCode, this.city, this.phoneNumber, this.orderDate, this.username, this.basketName);
+            return new OrderCart(
+                    this.id,
+                    this.motorcycles,
+                    this.firstName,
+                    this.lastName,
+                    this.street,
+                    this.postalCode,
+                    this.city,
+                    this.phoneNumber,
+                    this.orderDate,
+                    this.username,
+                    this.basketName);
         }
 
+        @Override
         public String toString() {
-            return "OrderCart.OrderCartBuilder(id=" + this.id + ", motorcycles=" + this.motorcycles + ", firstAndLastName=" + this.firstAndLastName + ", street=" + this.street + ", postalCode=" + this.postalCode + ", city=" + this.city + ", phoneNumber=" + this.phoneNumber + ", orderDate=" + this.orderDate + ", username=" + this.username + ", basketName=" + this.basketName + ")";
+            return "OrderCartBuilder{" +
+                    "id=" + id +
+                    ", motorcycles=" + motorcycles +
+                    ", firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    ", street='" + street + '\'' +
+                    ", postalCode='" + postalCode + '\'' +
+                    ", city='" + city + '\'' +
+                    ", phoneNumber=" + phoneNumber +
+                    ", orderDate=" + orderDate +
+                    ", username='" + username + '\'' +
+                    ", basketName='" + basketName + '\'' +
+                    '}';
         }
     }
 }
