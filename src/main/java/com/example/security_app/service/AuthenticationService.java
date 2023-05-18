@@ -11,28 +11,32 @@ import com.example.security_app.repository.UserRepository;
 import com.example.security_app.token.Token;
 import com.example.security_app.token.TokenType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import java.io.IOException;
 
 
 @Service
-@RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository repository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    public AuthenticationService(UserRepository repository, TokenRepository tokenRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.repository = repository;
+        this.tokenRepository = tokenRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
 
     public AuthenticationResponse register(RegisterRequestUser request) {
         var user = User.builder()
@@ -52,8 +56,6 @@ public class AuthenticationService {
                 .refreshToken(refreshToken)
                 .build();
     }
-
-
 
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -104,7 +106,7 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);

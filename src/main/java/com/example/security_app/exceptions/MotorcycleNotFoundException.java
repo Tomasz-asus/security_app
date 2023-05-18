@@ -4,10 +4,15 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+
 public class MotorcycleNotFoundException extends RuntimeException {
 
     public MotorcycleNotFoundException(String message) {
         super(message);
     }
+
+    public String toString() {
+        return "MotorcycleNotFoundException()";
+    }
+
 }

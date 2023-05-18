@@ -4,20 +4,18 @@ import com.example.security_app.DTO.OrderCartDTO;
 import com.example.security_app.model.Motorcycle;
 import com.example.security_app.model.OrderCart;
 import com.example.security_app.repository.BasketRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
 public class OrderMapper {
 
 
     private static BasketRepository basketRepository;
 
+    public OrderMapper() {
+    }
 
 
     public static OrderCart OrderfromDTO(OrderCartDTO orderCartDTO) {
@@ -49,4 +47,24 @@ public class OrderMapper {
         return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getMotorcycles());
     }
 
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof OrderMapper)) return false;
+        final OrderMapper other = (OrderMapper) o;
+        if (!other.canEqual((Object) this)) return false;
+        return true;
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof OrderMapper;
+    }
+
+    public int hashCode() {
+        int result = 1;
+        return result;
+    }
+
+    public String toString() {
+        return "OrderMapper()";
+    }
 }

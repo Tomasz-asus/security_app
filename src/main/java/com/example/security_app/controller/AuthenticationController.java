@@ -3,7 +3,6 @@ package com.example.security_app.controller;
 import com.example.security_app.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +13,13 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/shop/auth")
-@RequiredArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationService service;
+
+    public AuthenticationController(AuthenticationService service) {
+        this.service = service;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -25,12 +27,14 @@ public class AuthenticationController {
     ) {
         return ResponseEntity.ok(service.register(request));
     }
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
         return ResponseEntity.ok(service.authenticate(request));
     }
+
 
     @PostMapping("/refresh-token")
     public void refreshToken(
@@ -39,6 +43,5 @@ public class AuthenticationController {
     ) throws IOException {
         service.refreshToken(request, response);
     }
-
 
 }

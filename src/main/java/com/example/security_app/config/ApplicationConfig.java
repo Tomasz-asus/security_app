@@ -1,7 +1,6 @@
 package com.example.security_app.config;
 
 import com.example.security_app.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,35 +18,32 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 @Configuration
-@RequiredArgsConstructor
 public class ApplicationConfig {
-
     private final UserRepository userRepository;
+    public ApplicationConfig(UserRepository userRepository) {
+        this.userRepository = userRepository;}
+    @Bean
+    public UserDetailsService userDetailsService() {
+
+        return username -> userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("ni ma"));}
 
     @Bean
-    public UserDetailsService userDetailsService(){
-
-    return username -> userRepository.findByEmail(username)
-            .orElseThrow(()-> new UsernameNotFoundException("ni ma"));
-}
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
 
-        return authenticationProvider;
-}
+        return authenticationProvider;}
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
-        return config.getAuthenticationManager();
-}
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();}
+
     @Bean
     public PasswordEncoder passwordEncoder() {
 
-    return new BCryptPasswordEncoder();}
-
+        return new BCryptPasswordEncoder();}
 
     @Bean
     public CorsFilter corsFilter() {
@@ -61,5 +57,4 @@ public class ApplicationConfig {
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);
     }
-
 }
