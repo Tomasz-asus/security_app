@@ -1,21 +1,20 @@
 package com.example.security_app;
 
+
 import com.example.security_app.service.AuthenticationService;
 import com.example.security_app.controller.RegisterRequestUser;
-import com.example.security_app.repository.MotorcycleRepository;
+
+import com.example.security_app.service.SecurityAppServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 import static com.example.security_app.model.Role.*;
 
 @SpringBootApplication
 public class SecurityAppApplication {
-    private final MotorcycleRepository motorcycleRepository;
 
-    public SecurityAppApplication(MotorcycleRepository motorcycleRepository) {
-        this.motorcycleRepository = motorcycleRepository;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(SecurityAppApplication.class, args);
@@ -23,8 +22,8 @@ public class SecurityAppApplication {
 
     @Bean
     public CommandLineRunner commandLineRunner(
-            AuthenticationService service
-    ) {
+            AuthenticationService service, SecurityAppServiceImpl service2
+            ) {
         return args -> {
             var admin = RegisterRequestUser.builder()
                     .firstname("Admin")
@@ -43,6 +42,8 @@ public class SecurityAppApplication {
                     .role(USER)
                     .build();
             System.out.println("USER token: " + service.register(user).getAccessToken());
+
+
 
         };
     }

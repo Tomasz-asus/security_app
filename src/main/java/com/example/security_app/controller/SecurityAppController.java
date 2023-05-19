@@ -79,35 +79,4 @@ public class SecurityAppController {
         return new ResponseEntity<>(securityAppService.addOrder(orderDTO), HttpStatus.CREATED);
     }
 
-    public SecurityAppService getSecurityAppService() {
-        return this.securityAppService;
-    }
-
-    public boolean equals(final Object o) {
-        if (o == this) return true;
-        if (!(o instanceof SecurityAppController)) return false;
-        final SecurityAppController other = (SecurityAppController) o;
-        if (!other.canEqual((Object) this)) return false;
-        final Object this$securityAppService = this.getSecurityAppService();
-        final Object other$securityAppService = other.getSecurityAppService();
-        if (this$securityAppService == null ? other$securityAppService != null : !this$securityAppService.equals(other$securityAppService))
-            return false;
-        return true;
-    }
-
-    protected boolean canEqual(final Object other) {
-        return other instanceof SecurityAppController;
-    }
-
-    public int hashCode() {
-        final int PRIME = 59;
-        int result = 1;
-        final Object $securityAppService = this.getSecurityAppService();
-        result = result * PRIME + ($securityAppService == null ? 43 : $securityAppService.hashCode());
-        return result;
-    }
-
-    public String toString() {
-        return "SecurityAppController(securityAppService=" + this.getSecurityAppService() + ")";
-    }
 }

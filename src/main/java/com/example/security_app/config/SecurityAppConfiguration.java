@@ -13,6 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import static com.example.security_app.model.Permission.*;
+import static com.example.security_app.model.Role.ADMIN;
+import static com.example.security_app.model.Role.USER;
+import static org.springframework.http.HttpMethod.*;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -35,25 +40,22 @@ public class SecurityAppConfiguration {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/shop/**"
-                        // "/shop/auth/**"
+                        "/shop/**",
+                        "/auth/register",
+                        "/auth/authenticate"
                 )
                 .permitAll()
 
-//
-//                .requestMatchers("/shop/management/**")
-//                .hasAnyRole(
-//                        ADMIN.name(),
-//                        MANAGER.name(),
-//                        USER.name())
-//
-//
-//                .requestMatchers(GET, "/shop/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name(), USER_READ.name())
-//                .requestMatchers(POST, "/shop/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name(),USER_CREATE.name())
-//                .requestMatchers(PUT, "/shop/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name(),USER_UPDATE.name())
-//                .requestMatchers(DELETE, "/shop/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name(), USER_DELETE.name())
-//
-//
+                .requestMatchers("auth/refresh-token")
+                .hasAnyRole(
+                        ADMIN.name(),
+                        USER.name())
+
+                .requestMatchers(GET, "auth/refresh-token").hasAnyAuthority(ADMIN_READ.name(), USER_READ.name())
+                .requestMatchers(POST,"auth/refresh-token").hasAnyAuthority(ADMIN_CREATE.name(),USER_READ.name())
+                .requestMatchers(PUT, "auth/refresh-token").hasAnyAuthority(ADMIN_UPDATE.name(),USER_READ.name())
+                .requestMatchers(DELETE, "auth/refresh-token").hasAnyAuthority(ADMIN_DELETE.name())
+
 
                 .anyRequest()
                 .authenticated()
@@ -64,7 +66,7 @@ public class SecurityAppConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
-                .logoutUrl("/shop/auth/logout")
+                .logoutUrl("/auth/logout")
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
         ;

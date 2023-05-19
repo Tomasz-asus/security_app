@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/shop/auth")
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     private final AuthenticationService service;

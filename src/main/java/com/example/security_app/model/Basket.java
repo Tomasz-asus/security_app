@@ -48,56 +48,6 @@ public class Basket {
         return this.basketName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setMotorcycles(List<Motorcycle> motorcycles) {
-        this.motorcycles = motorcycles;
-    }
-
-    public void setBasketName(String basketName) {
-        this.basketName = basketName;
-    }
-
-    public boolean equals(final Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Basket)) return false;
-        final Basket other = (Basket) o;
-        if (!other.canEqual((Object) this)) return false;
-        final Object this$id = this.getId();
-        final Object other$id = other.getId();
-        if (this$id == null ? other$id != null : !this$id.equals(other$id)) return false;
-        final Object this$motorcycles = this.getMotorcycles();
-        final Object other$motorcycles = other.getMotorcycles();
-        if (this$motorcycles == null ? other$motorcycles != null : !this$motorcycles.equals(other$motorcycles))
-            return false;
-        final Object this$basketName = this.getBasketName();
-        final Object other$basketName = other.getBasketName();
-        if (this$basketName == null ? other$basketName != null : !this$basketName.equals(other$basketName))
-            return false;
-        return true;
-    }
-
-    protected boolean canEqual(final Object other) {
-        return other instanceof Basket;
-    }
-
-    public int hashCode() {
-        final int PRIME = 59;
-        int result = 1;
-        final Object $id = this.getId();
-        result = result * PRIME + ($id == null ? 43 : $id.hashCode());
-        final Object $motorcycles = this.getMotorcycles();
-        result = result * PRIME + ($motorcycles == null ? 43 : $motorcycles.hashCode());
-        final Object $basketName = this.getBasketName();
-        result = result * PRIME + ($basketName == null ? 43 : $basketName.hashCode());
-        return result;
-    }
-
-    public String toString() {
-        return "Basket(id=" + this.getId() + ", motorcycles=" + this.getMotorcycles() + ", basketName=" + this.getBasketName() + ")";
-    }
 
     public static class BasketBuilder {
         private Integer id;

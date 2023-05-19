@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface SecurityAppService {
 
-
-
-
     MotorcycleDTO addMotorcycle(MotorcycleDTO motorcycleDTO);
 
     List<MotorcycleDTO> getAllMotorcycles();

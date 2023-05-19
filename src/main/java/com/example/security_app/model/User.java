@@ -24,7 +24,7 @@
      private String password;
 
      @Enumerated(EnumType.STRING)
-     private Role role;
+     private Role role =Role.USER;
 
      @OneToMany(mappedBy = "user")
      private List<Token> tokens;
